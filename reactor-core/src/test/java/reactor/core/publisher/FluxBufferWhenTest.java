@@ -205,9 +205,7 @@ public class FluxBufferWhenTest {
 
 		sp2.emitNext(2);
 
-		Assert.assertTrue("sp4 has no subscribers?", Scannable.from(sp4)
-															  .inners()
-															  .count() != 0);
+		assertThat(sp4.hasSubscriber()).as("sp4 hasSubscriber").isTrue();
 
 		sp1.emitNext(6);
 
@@ -249,9 +247,7 @@ public class FluxBufferWhenTest {
 		open.emitNext(1);
 		open.emitComplete();
 
-		Assert.assertTrue("close has no subscribers?", Scannable.from(close)
-																.inners()
-																.count() != 0);
+		assertThat(close.hasSubscriber()).as("close hasSubscriber").isTrue();
 
 		source.emitNext(2);
 		source.emitNext(3);
@@ -263,14 +259,9 @@ public class FluxBufferWhenTest {
 		  .assertNoError()
 		  .assertComplete();
 
-		//		Assert.assertFalse("source has subscribers?", Scannable.from(source).inners().count() != 0); //FIXME
-		Assert.assertFalse("open has subscribers?", Scannable.from(open)
-															 .inners()
-															 .count() != 0);
-		Assert.assertFalse("close has subscribers?", Scannable.from(close)
-															  .inners()
-															  .count() != 0);
-
+		assertThat(source.hasSubscriber()).as("source hasSubscriber").isFalse();
+		assertThat(open.hasSubscriber()).as("open hasSubscriber").isFalse();
+		assertThat(close.hasSubscriber()).as("close hasSubscriber").isFalse();
 	}
 
 

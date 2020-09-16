@@ -50,7 +50,7 @@ public class ReplayProcessorTest {
         rp.onNext(3);
         rp.onComplete();
 
-        Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+        assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
 
         ts.assertNoValues();
         
@@ -78,7 +78,7 @@ public class ReplayProcessorTest {
         rp.onNext(3);
         rp.onComplete();
 
-        Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+        assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
 
         ts.assertNoValues();
         
@@ -102,8 +102,8 @@ public class ReplayProcessorTest {
 	    rp.subscribe(ts);
         
         ts.cancel();
-        
-        Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+
+	    assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
     }
 
     @Test
@@ -119,7 +119,7 @@ public class ReplayProcessorTest {
 
         rp.subscribe(ts);
 
-        Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+	    assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
 
         ts.assertNoValues();
         
@@ -147,7 +147,7 @@ public class ReplayProcessorTest {
 
         rp.subscribe(ts);
 
-        Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+	    assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
 
         ts.assertNoValues();
         
@@ -175,7 +175,7 @@ public class ReplayProcessorTest {
 
         rp.subscribe(ts);
 
-        Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+	    assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
 
         ts.assertNoValues();
         
@@ -445,7 +445,7 @@ public class ReplayProcessorTest {
 		            .expectNext(15,16,17,18,19)
 		            .verifyComplete();
 
-		Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+		assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
     }
 
 	@Test
@@ -470,7 +470,7 @@ public class ReplayProcessorTest {
 		            .expectNext(15,16,17,18,19)
 		            .verifyErrorMessage("test");
 
-		Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+		assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
     }
 
 	@Test
@@ -495,7 +495,7 @@ public class ReplayProcessorTest {
 		            .expectNextCount(20)
 		            .verifyComplete();
 
-		Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+		assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
     }
 
 	@Test
@@ -520,7 +520,7 @@ public class ReplayProcessorTest {
 		            .expectNext(15,16,17,18,19)
 		            .verifyComplete();
 
-		Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+		assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -545,7 +545,7 @@ public class ReplayProcessorTest {
 		            .expectNext(15,16,17,18,19)
 		            .verifyErrorMessage("test");
 
-		Assert.assertFalse("Has subscribers?", rp.hasDownstreams());
+		assertThat(rp.hasSubscriber()).as("hasSubscriber").isFalse();
 	}
 
 	@Test

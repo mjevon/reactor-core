@@ -183,10 +183,10 @@ public class FluxWindowWhenTest {
 		expect(ts, 0, 2, 3);
 		expect(ts, 1, 3, 4);
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
-		Assert.assertFalse("sp3 has subscribers?", Scannable.from(sp3).inners().count() != 0);
-		Assert.assertFalse("sp4 has subscribers?", Scannable.from(sp4).inners().count() != 0);
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
+		assertThat(sp3.hasSubscriber()).as("sp3 hasSubscriber").isFalse();
+		assertThat(sp4.hasSubscriber()).as("sp4 hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -227,10 +227,10 @@ public class FluxWindowWhenTest {
 		expect(ts, 0, 2, 3);
 		expect(ts, 1, 3, 4);
 
-		Assert.assertFalse("openSelector has subscribers?", Scannable.from(openSelector).inners().count() != 0);
-		Assert.assertFalse("closeSelectorFor1 has subscribers?", Scannable.from(closeSelectorFor1).inners().count() != 0);
-		Assert.assertFalse("closeSelectorForOthers has subscribers?", Scannable.from(closeSelectorForOthers).inners().count() != 0);
-		Assert.assertFalse("source has subscribers?", Scannable.from(source).inners().count() != 0);
+		assertThat(openSelector.hasSubscriber()).as("openSelector hasSubscriber").isFalse();
+		assertThat(closeSelectorFor1.hasSubscriber()).as("closeSelectorFor1 hasSubscriber").isFalse();
+		assertThat(closeSelectorForOthers.hasSubscriber()).as("closeSelectorForOthers hasSubscriber").isFalse();
+		assertThat(source.hasSubscriber()).as("source hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -262,10 +262,10 @@ public class FluxWindowWhenTest {
 
 		expect(ts, 0, 1, 2, 3);
 
-		Assert.assertFalse("source has subscribers?", Scannable.from(source).inners().count() != 0);
-		Assert.assertFalse("openSelector has subscribers?", Scannable.from(openSelector).inners().count() != 0);
-		Assert.assertFalse("closeSelectorFor1 has subscribers?", Scannable.from(closeSelectorFor1).inners().count() != 0);
-		Assert.assertFalse("closeSelectorOthers has subscribers?", Scannable.from(closeSelectorOthers).inners().count() != 0);
+		assertThat(openSelector.hasSubscriber()).as("openSelector hasSubscriber").isFalse();
+		assertThat(closeSelectorFor1.hasSubscriber()).as("closeSelectorFor1 hasSubscriber").isFalse();
+		assertThat(closeSelectorOthers.hasSubscriber()).as("closeSelectorOthers hasSubscriber").isFalse();
+		assertThat(source.hasSubscriber()).as("source hasSubscriber").isFalse();
 	}
 
 

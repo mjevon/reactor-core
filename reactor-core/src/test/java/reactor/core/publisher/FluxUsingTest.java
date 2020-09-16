@@ -268,7 +268,7 @@ public class FluxUsingTest extends FluxOperatorTest<String, String> {
 		Flux.using(() -> 1, r -> tp.asFlux(), cleanup::set, true)
 		    .subscribe(ts);
 
-		Assert.assertTrue("No subscriber?", Scannable.from(tp).inners().count() != 0);
+		assertThat(tp.hasSubscriber()).as("tp hasSubscriber").isTrue();
 
 		tp.emitNext(1);
 
@@ -284,7 +284,7 @@ public class FluxUsingTest extends FluxOperatorTest<String, String> {
 		  .assertNotComplete()
 		  .assertNoError();
 
-		Assert.assertFalse("Has subscriber?", Scannable.from(tp).inners().count() != 0);
+		assertThat(tp.hasSubscriber()).as("tp hasSubscriber").isFalse();
 
 		Assert.assertEquals(1, cleanup.get());
 	}

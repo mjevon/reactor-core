@@ -82,8 +82,8 @@ public class FluxWindowBoundaryTest {
 		ts.assertNoError()
 		  .assertComplete();
 
-		Assert.assertFalse("sp1 has subscribers", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers", Scannable.from(sp1).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -118,8 +118,8 @@ public class FluxWindowBoundaryTest {
 		ts.assertNoError()
 		  .assertComplete();
 
-		Assert.assertFalse("sp1 has subscribers", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers", Scannable.from(sp1).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -160,8 +160,8 @@ public class FluxWindowBoundaryTest {
 		  .assertErrorMessage("forced failure")
 		  .assertNotComplete();
 
-		Assert.assertFalse("sp1 has subscribers", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers", Scannable.from(sp1).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -202,8 +202,8 @@ public class FluxWindowBoundaryTest {
 		  .assertErrorMessage("forced failure")
 		  .assertNotComplete();
 
-		Assert.assertFalse("sp1 has subscribers", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers", Scannable.from(sp1).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 	}
 
 

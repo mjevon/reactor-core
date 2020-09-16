@@ -189,30 +189,30 @@ public class FluxRefCountTest {
 						   .publish()
 						   .refCount();
 
-		Assert.assertFalse("sp has subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isFalse();
 
 		AssertSubscriber<Integer> ts1 = AssertSubscriber.create();
 		p.subscribe(ts1);
 
-		Assert.assertTrue("sp has no subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isTrue();
 
 		AssertSubscriber<Integer> ts2 = AssertSubscriber.create();
 		p.subscribe(ts2);
 
-		Assert.assertTrue("sp has no subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isTrue();
 
 		e.emitNext(1);
 		e.emitNext(2);
 
 		ts1.cancel();
 
-		Assert.assertTrue("sp has no subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isTrue();
 
 		e.emitNext(3);
 
 		ts2.cancel();
 
-		Assert.assertFalse("sp has subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isFalse();
 
 		ts1.assertValues(1, 2)
 		   .assertNoError()
@@ -231,30 +231,30 @@ public class FluxRefCountTest {
 						   .publish()
 						   .refCount(2);
 
-		Assert.assertFalse("sp has subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isFalse();
 
 		AssertSubscriber<Integer> ts1 = AssertSubscriber.create();
 		p.subscribe(ts1);
 
-		Assert.assertFalse("sp has subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isFalse();
 
 		AssertSubscriber<Integer> ts2 = AssertSubscriber.create();
 		p.subscribe(ts2);
 
-		Assert.assertTrue("sp has no subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isTrue();
 
 		e.emitNext(1);
 		e.emitNext(2);
 
 		ts1.cancel();
 
-		Assert.assertTrue("sp has no subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isTrue();
 
 		e.emitNext(3);
 
 		ts2.cancel();
 
-		Assert.assertFalse("sp has subscribers?", Scannable.from(e).inners().count() != 0);
+		assertThat(e.hasSubscriber()).as("source connected").isFalse();
 
 		ts1.assertValues(1, 2)
 		   .assertNoError()

@@ -69,9 +69,9 @@ public class FluxSampleTimeoutTest {
 		  .assertNoError()
 		  .assertComplete();
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
-		Assert.assertFalse("sp3 has subscribers?", Scannable.from(sp3).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
+		assertThat(sp3.hasSubscriber()).as("sp3 hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -93,8 +93,8 @@ public class FluxSampleTimeoutTest {
 		  .assertErrorMessage("forced failure")
 		  .assertNotComplete();
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -116,8 +116,8 @@ public class FluxSampleTimeoutTest {
 		  .assertErrorMessage("forced failure")
 		  .assertNotComplete();
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -136,7 +136,7 @@ public class FluxSampleTimeoutTest {
 		  .assertError(NullPointerException.class)
 		  .assertNotComplete();
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
 	}
 
 	@Test

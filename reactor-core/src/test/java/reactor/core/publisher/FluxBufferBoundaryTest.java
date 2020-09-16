@@ -155,7 +155,7 @@ public class FluxBufferBoundaryTest
 
 		sp1.emitError(new RuntimeException("forced failure"));
 
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 
 		sp2.emitNext(2);
 
@@ -204,7 +204,7 @@ public class FluxBufferBoundaryTest
 
 		sp2.emitError(new RuntimeException("forced failure"));
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
 
 		ts.assertValues(Arrays.asList(1, 2))
 		  .assertError(RuntimeException.class)
@@ -232,8 +232,8 @@ public class FluxBufferBoundaryTest
 		})
 		   .subscribe(ts);
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 
 		ts.assertNoValues()
 		  .assertError(RuntimeException.class)
@@ -264,8 +264,8 @@ public class FluxBufferBoundaryTest
 
 		sp2.emitNext(1);
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 
 		ts.assertNoValues()
 		  .assertError(RuntimeException.class)
@@ -284,8 +284,8 @@ public class FluxBufferBoundaryTest
 		   .buffer(sp2.asFlux(), (Supplier<List<Integer>>) () -> null)
 		   .subscribe(ts);
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
+		assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 
 		ts.assertNoValues()
 		  .assertError(NullPointerException.class)

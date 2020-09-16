@@ -185,7 +185,7 @@ public class FluxMergeSequentialTest {
 
 		main.emitError(new RuntimeException("Forced failure"));
 
-		assertFalse("inner has subscribers?", Scannable.from(inner).inners().count() != 0);
+		assertThat(inner.hasSubscriber()).as("inner hasSubscriber").isFalse();
 
 		inner.emitNext(3);
 		inner.emitComplete();

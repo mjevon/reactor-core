@@ -103,8 +103,8 @@ public class FluxSampleTest {
 			  .assertErrorMessage("forced failure");
 		}
 
-		Assert.assertFalse("Main has subscribers?", Scannable.from(main).inners().count() != 0);
-		Assert.assertFalse("Other has subscribers?", Scannable.from(other).inners().count() != 0);
+		assertThat(main.hasSubscriber()).as("main hasSubscriber").isFalse();
+		assertThat(other.hasSubscriber()).as("other hasSubscriber").isFalse();
 	}
 
 	@Test
@@ -137,13 +137,13 @@ public class FluxSampleTest {
 
 		main.asFlux().sample(other.asFlux()).subscribe(ts);
 
-		Assert.assertTrue("Main no subscriber?", Scannable.from(main).inners().count() != 0);
-		Assert.assertTrue("Other no subscriber?", Scannable.from(other).inners().count() != 0);
+		assertThat(main.hasSubscriber()).as("main hasSubscriber").isTrue();
+		assertThat(other.hasSubscriber()).as("other hasSubscriber").isTrue();
 
 		ts.cancel();
 
-		Assert.assertFalse("Main no subscriber?", Scannable.from(main).inners().count() != 0);
-		Assert.assertFalse("Other no subscriber?", Scannable.from(other).inners().count() != 0);
+		assertThat(main.hasSubscriber()).as("main hasSubscriber").isFalse();
+		assertThat(other.hasSubscriber()).as("other hasSubscriber").isFalse();
 
 		ts.assertNoValues()
 		  .assertNoError()
@@ -166,8 +166,8 @@ public class FluxSampleTest {
 
 		main.asFlux().sample(other.asFlux()).subscribe(ts);
 
-		Assert.assertFalse("Main subscriber?", Scannable.from(main).inners().count() != 0);
-		Assert.assertFalse("Other subscriber?", Scannable.from(other).inners().count() != 0);
+		assertThat(main.hasSubscriber()).as("main hasSubscriber").isFalse();
+		assertThat(other.hasSubscriber()).as("other hasSubscriber").isFalse();
 
 		ts.assertNoValues()
 		  .assertNoError()

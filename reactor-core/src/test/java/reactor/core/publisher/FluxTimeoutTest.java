@@ -126,7 +126,7 @@ public class FluxTimeoutTest {
 
 		source.emitComplete();
 
-		Assert.assertFalse("Timeout has subscribers?", Scannable.from(tp).inners().count() != 0);
+		assertThat(tp.hasSubscriber()).as("timeout hasSubscriber").isFalse();
 
 		ts.assertValues(0)
 		  .assertComplete()
@@ -176,7 +176,7 @@ public class FluxTimeoutTest {
 
 		source.emitComplete();
 
-		Assert.assertFalse("Timeout has subscribers?", Scannable.from(tp).inners().count() != 0);
+		assertThat(tp.hasSubscriber()).as("timeout hasSubscriber").isFalse();
 
 		ts.assertValues(0)
 		  .assertComplete()

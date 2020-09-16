@@ -19,7 +19,6 @@ package reactor.core.publisher;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Assert;
 import org.junit.Test;
 import org.reactivestreams.Subscription;
 
@@ -124,7 +123,7 @@ public class FluxSwitchMapTest {
 
 		sp1.emitNext(2);
 
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
+		Assertions.assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 
 		sp2.emitNext(30);
 		sp3.emitNext(300);
@@ -233,8 +232,8 @@ public class FluxSwitchMapTest {
 		  .assertErrorMessage("forced failure")
 		  .assertNotComplete();
 
-		Assert.assertFalse("sp1 has subscribers?", Scannable.from(sp1).inners().findAny().isPresent());
-		Assert.assertFalse("sp2 has subscribers?", Scannable.from(sp2).inners().findAny().isPresent());
+		Assertions.assertThat(sp1.hasSubscriber()).as("sp1 hasSubscriber").isFalse();
+		Assertions.assertThat(sp2.hasSubscriber()).as("sp2 hasSubscriber").isFalse();
 	}
 
 	@Test
