@@ -138,6 +138,11 @@ public class SerializedManySinkTest {
 		}
 
 		@Override
+		public boolean hasSubscriber() {
+			return delegate.hasSubscriber();
+		}
+
+		@Override
 		public Flux<T> asFlux() {
 			return delegate.asFlux();
 		}

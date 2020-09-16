@@ -601,6 +601,17 @@ public final class Sinks {
 		void emitError(Throwable error);
 
 		/**
+		 * Determines if the sink currently has at least one subscriber.
+		 * <p>
+		 * This is a best effort peek at the sink state, and a subsequent attempt at emitting
+		 * to the sink might still return {@link Emission#FAIL_ZERO_SUBSCRIBER} where relevant
+		 * (generally in {@link #tryEmitNext(Object)}).
+		 *
+		 * @return {@code true} if the sink has at least one subscriber at the time of invocation, {@code false} otherwise
+		 */
+		boolean hasSubscriber();
+
+		/**
 		 * Return a {@link Flux} view of this sink. Every call returns the same instance.
 		 *
 		 * @return the {@link Flux} view associated to this {@link Sinks.Many}
@@ -675,6 +686,16 @@ public final class Sinks {
 		 */
 		@Deprecated
 		void emitError(Throwable error);
+
+		/**
+		 * Determines if the sink currently has at least one subscriber.
+		 * <p>
+		 * This is a best effort peek at the sink state, and a subsequent attempt at emitting
+		 * to the sink might still return {@link Emission#FAIL_ZERO_SUBSCRIBER} where relevant.
+		 *
+		 * @return {@code true} if the sink has at least one subscriber at the time of invocation, {@code false} otherwise
+		 */
+		boolean hasSubscriber();
 
 		/**
 		 * Return a {@link Mono} view of this sink. Every call returns the same instance.

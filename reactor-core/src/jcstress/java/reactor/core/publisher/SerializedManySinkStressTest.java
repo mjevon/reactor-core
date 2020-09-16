@@ -117,6 +117,11 @@ public class SerializedManySinkStressTest {
 		}
 
 		@Override
+		public boolean hasSubscriber() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
 		public Flux<T> asFlux() {
 			throw new UnsupportedOperationException();
 		}

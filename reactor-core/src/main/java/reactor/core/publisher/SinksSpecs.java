@@ -53,6 +53,11 @@ final class SerializedManySink<T> implements Many<T>, Scannable {
 	}
 
 	@Override
+	public boolean hasSubscriber() {
+		return sink.hasSubscriber();
+	}
+
+	@Override
 	public Flux<T> asFlux() {
 		return sink.asFlux();
 	}

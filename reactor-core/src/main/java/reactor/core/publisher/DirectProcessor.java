@@ -246,6 +246,11 @@ public final class DirectProcessor<T> extends FluxProcessor<T, T> implements Sin
 	}
 
 	@Override
+	public boolean hasSubscriber() {
+		return subscribers.length > 0;
+	}
+
+	@Override
 	public Flux<T> asFlux() {
 		return this;
 	}

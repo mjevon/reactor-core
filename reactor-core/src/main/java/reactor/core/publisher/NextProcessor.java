@@ -50,6 +50,11 @@ class NextProcessor<O> extends MonoProcessor<O> implements Sinks.One<O> {
 	}
 
 	@Override
+	public boolean hasSubscriber() {
+		return subscribers.length > 0;
+	}
+
+	@Override
 	public Mono<O> asMono() {
 		return this;
 	}
